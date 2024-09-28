@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+seamless-communication = {git = "https://github.com/facebookresearch/seamless_communication.git"}
+fairseq2 = "*"
+pydub = "*"
+sentencepiece = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
