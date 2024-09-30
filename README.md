@@ -89,3 +89,27 @@ brew install readline xz
 - [How to Run on MacOS](https://betterprogramming.pub/how-to-run-metas-new-model-seamlessm4t-on-macos-172b84b285e3)
     - Don't follow everything in this. It's out of date.
 - [Deployment](https://community.sap.com/t5/technology-blogs-by-sap/deployment-of-seamless-m4t-v2-models-on-sap-ai-core/ba-p/13680013)
+
+## Examples
+
+### T2TT
+
+There's definitely some bias that's obvious in the ENG->SPA translations. It defaults to male for computer programmer and software engineer but defaults to female for teachers. If you tell it you're a man or a woman, it fixes it.
+
+```
+python t2tt.py eng spa "I'm a software engineer."
+Translated text:
+Soy ingeniero de software.
+
+python t2tt.py eng spa "I'm a woman who is a software engineer."
+Translated text:
+Soy una mujer que es ingeniera de software.
+
+python t2tt.py eng spa "I'm a teacher."
+Translated text:
+Yo soy maestra.
+
+python t2tt.py eng spa "I'm a man who is a teacher."
+Translated text:
+Soy un hombre que es un maestro
+```
