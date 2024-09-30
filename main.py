@@ -91,4 +91,15 @@ for tgt_lang in tgt_langs:
     # display(audio_play)
     # print()
 
+# T2TT
+text_output, _ = translator.predict(
+    input=SAMPLE_TEXT,
+    task_str="T2TT",
+    tgt_lang="spa",
+    src_lang="eng",
+    # text_generation_opts=text_generation_opts,
+    unit_generation_opts=None
+)
+print(f"{text_output[0]}")
+
 print("Finished.)")
