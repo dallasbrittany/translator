@@ -35,13 +35,16 @@ translator = Translator(
 # Resample the audio in 16khz if sample rate is not 16khz already.
 # torchaudio.functional.resample(audio, orig_freq=orig_freq, new_freq=16_000)
 
-in_file = "audio_samples/input/LJ037-0171_sr16k.wav"
+AUDIO_DIRECTORY = "audio_samples"
+INFILE_DIRECTORY = f"{AUDIO_DIRECTORY}/input"
+OUTFILE_DIRECTORY = f"{AUDIO_DIRECTORY}/output"
+tgt_langs = ("eng", "spa", "fra", "deu", "ita", "hin", "cmn")
+
+in_file = f"{INFILE_DIRECTORY}/LJ037-0171_sr16k.wav"
 
 # TODO: This is Jupyter notebook specific - could find a replacement other than just adding "eng" to tgt_lang and showing text
 # print("English audio:")
 # display(Audio(in_file, rate=16000, autoplay=False, normalize=True))
-
-tgt_langs = ("eng", "spa", "fra", "deu", "ita", "hin", "cmn")
 
 for tgt_lang in tgt_langs:
     text_output, speech_output = translator.predict(
@@ -50,10 +53,10 @@ for tgt_lang in tgt_langs:
         tgt_lang=tgt_lang,
     )
 
-    print(f"Translated text in {tgt_lang}: {text_output[0]}")
+    print(f"Translated text in {tgt_lang}:\n{text_output[0]}")
     print()
 
-    out_file = f"audio_samples/output/translated_LJ_{tgt_lang}.wav"
+    out_file = f"{OUTFILE_DIRECTORY}/translated_LJ_{tgt_lang}.wav"
 
     torchaudio.save(out_file, speech_output.audio_wavs[0][0].to(torch.float32).cpu(), speech_output.sample_rate)
 
@@ -63,4 +66,29 @@ for tgt_lang in tgt_langs:
     # display(audio_play)
     # print()
 
-    print("Translated audio files")
+    print(f"Saved translated audio file for {tgt_lang}.")
+print()
+
+SAMPLE_TEXT = "Hey everyone! I hope you're all doing well. Thank you for attending our workshop."
+for tgt_lang in tgt_langs:
+    text_output, speech_output = translator.predict(
+        input=SAMPLE_TEXT,
+        task_str="t2st",
+        tgt_lang=tgt_lang,
+        src_lang="eng",
+    )
+
+    print(f"Translated text in {tgt_lang}: {text_output[0]}")
+    print()
+
+    out_file = f"{OUTFILE_DIRECTORY}/{tgt_lang}.wav"
+
+    torchaudio.save(out_file, speech_output.audio_wavs[0][0].to(torch.float32).cpu(), speech_output.sample_rate)
+
+    # TODO: Replace Jupyter-specific code
+    # print(f"Translated audio in {tgt_lang}:")
+    # audio_play = Audio(out_file, rate=speech_output.sample_rate, autoplay=False, normalize=True)
+    # display(audio_play)
+    # print()
+
+print("Finished.)")
