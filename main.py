@@ -102,4 +102,4 @@ text_output, _ = translator.predict(
 )
 print(f"{text_output[0]}")
 
-print("Finished.)")
+print("Finished.")
