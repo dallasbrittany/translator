@@ -94,6 +94,22 @@ brew install readline xz
 
 ### T2TT
 
+#### Accents
+
+It does appear to take punctuation into account, and it can infer accents if it has enough information from the punctuation.
+
+```
+python t2tt.py spa eng "si yo quiero"
+Translated text:
+If I want to
+
+python t2tt.py spa eng "si, yo quiero"
+Translated text:
+Yes, I want to.
+```
+
+#### Bias
+
 There's definitely some bias that's obvious in the ENG->SPA translations. It defaults to male for computer programmer and software engineer but defaults to female for teachers. If you tell it you're a man or a woman, it fixes it.
 
 ```
